@@ -1,0 +1,14 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+{% if questionnaire_part_list %}
+    <ul>
+    {% for questionnaire_part in questionnaire_part_list %}
+    	{% if questionnaire_part.part %}
+        	<li><a href="{% url 'polls:question_part' questionnaire_part.part.id %}">{{ questionnaire_part.part.part_title }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
