@@ -27,6 +27,10 @@ class Question(models.Model):
     question_text = models.CharField(max_length=500)
     pub_date = models.DateTimeField('date published')
     question_type = models.IntegerField('Type question, 1 open question, 2 Chosee one, 3 Multiple chosee', default=1)
+    questionnaire = models.ForeignKey(Questionnaire, 
+        on_delete=models.DO_NOTHING, 
+        blank=True,
+        null=True )
     def __str__(self):
         return self.question_text
     def was_published_recently(self):
@@ -38,7 +42,7 @@ class Question(models.Model):
     was_published_recently.short_description = 'Published recently?'
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.DO_NOTHING)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
     def __str__(self):
@@ -67,6 +71,8 @@ class QuestionnairePart(models.Model):
         blank=True,
         null=True )
     order_questionnaire = models.IntegerField(default=1)
+    def __str__(self):
+        return self.questionnaire.questionnaire_title +' '+ self.part.part_title
     
 
 

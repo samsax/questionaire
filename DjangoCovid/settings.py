@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 '2242ec1b4824.ngrok.io',
-'127.0.0.1'
+'127.0.0.1',
+'localhost'
 ]
 
 
@@ -58,7 +59,8 @@ ROOT_URLCONF = 'DjangoCovid.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,5 +122,5 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
-
 STATIC_URL = '/static/'
+

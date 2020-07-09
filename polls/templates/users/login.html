@@ -1,0 +1,29 @@
+{% load static %}
+<head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'users/login.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+<!------ Include the above in your HEAD tag ---------->
+</head>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+        <div class="fadeIn first">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <h2>Iniciar sesión</h2>
+    </div>
+    <form method="POST">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+<div id="formFooter">
+    <a href="/polls/register">Registrar usuario</a>
+  </div>
+
+</div>
+</div>
