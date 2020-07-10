@@ -1,1 +1,1 @@
-web: gunicorn questiapp.wsgi --log-file -
+web: gunicorn DjangoCovid.wsgi --log-file -
