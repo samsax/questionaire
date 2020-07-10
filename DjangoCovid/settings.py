@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
 import os
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,12 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'qfb3+j@#$bk4=x)k@cpy5p-1w3-5^1d8zj=h&*jfj#85a2nmf!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-'2242ec1b4824.ngrok.io',
-'127.0.0.1',
-'localhost'
+'*'
 ]
 
 
@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoCovid.urls'
@@ -80,14 +81,17 @@ WSGI_APPLICATION = 'DjangoCovid.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'tuyrmzrw',
-            'USER': 'tuyrmzrw',
-            'PASSWORD': 'E4BXxIYSAaO89rAI5NGfJjKzS9tFy_V3',
-            'HOST': 'ruby.db.elephantsql.com',
-            'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+    # 'default': {
+    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': 'tuyrmzrw',
+    #         'USER': 'tuyrmzrw',
+    #         'PASSWORD': 'E4BXxIYSAaO89rAI5NGfJjKzS9tFy_V3',
+    #         'HOST': 'ruby.db.elephantsql.com',
+    #         'PORT': '5432',
+    # }
 }
 
 
@@ -126,6 +130,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATIC_ROOT = 'questionnaire/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
