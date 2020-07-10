@@ -1,1 +1,1 @@
-web: gunicorn DjangoCovid.wsgi 
+web: gunicorn questiapp.wsgi 
