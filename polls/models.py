@@ -88,7 +88,7 @@ class PartQuestion(models.Model):
         return self.question.question_text
 
 
-class ResponseQuestion(model.Model):
+class ResponseQuestion(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice =  models.ForeignKey(Choice, 
         on_delete=models.DO_NOTHING, 

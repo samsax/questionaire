@@ -127,3 +127,5 @@ def logout(request):
     # Redireccionamos a la portada
     return redirect('/polls/')
 
+def home(request):
+    return render(request, "polls/home.html")
