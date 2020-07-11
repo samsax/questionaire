@@ -88,5 +88,15 @@ class PartQuestion(models.Model):
         return self.question.question_text
 
 
+class ResponseQuestion(model.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice =  models.ForeignKey(Choice, 
+        on_delete=models.DO_NOTHING, 
+        blank=True,
+        null=True )
+    def __str__(self):
+        return "%s %s" % (self.question.question_text,self.choice.choice_text)
+
+
 
 

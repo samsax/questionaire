@@ -126,3 +126,4 @@ def logout(request):
     do_logout(request)
     # Redireccionamos a la portada
     return redirect('/polls/')
+
