@@ -19,10 +19,10 @@
 {% if question_part_list %}
 	
 	
-	<form  method="post">
+	<form id="app" method="post">
 	{% csrf_token %}
 	{% for question_part in question_part_list %}
-	<div class="card">
+	<div id="question_part{{question_part.id}}"class="card">
 		<div class="form-group">
 			<div class="card-header">
 				<label for="FormControlSelect{{question_part.id}}">
@@ -30,17 +30,17 @@
 			</div>
 			<div class="card-body">
 				{% if question_part.question.question_type == 2 %}
-				<select class="form-control" id="FormControlSelect{{question_part.id}}">
+				<select name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
 						<option value="{{ choice.id }}">{{ choice.choice_text }}</option>
 					{% endfor %}
 				</select>
 				{% elif question_part.question.question_type == 1 %}
 				<div class="input-group input-group-sm mb-3">
-					<input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+					<input type="text" name="{{question_part.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				{% else %}
-				<select multiple  class="form-control" id="FormControlSelect{{question_part.id}}">
+				<select multiple name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
 						<option value="{{ choice.id }}">{{ choice.choice_text }}</option>
 					{% endfor %}
@@ -50,15 +50,17 @@
 		</div>
 	</div>
 	{% endfor %}
-	<input class="btn btn-primary" type="submit" value="Enviar">
+	<input class="btn btn-primary" @click="sendResponse" value="Enviar">
 	</form>
 	</div>
 	</div>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="{% static 'js/polls/question_part.js' %}"></script>
 <script>
-	questions_list = "{{question_part_list}}"
+	save_response ="{% url 'polls:save_response' %}"
 </script>
 </body>
 {% endblock %}
