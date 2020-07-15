@@ -50,8 +50,12 @@ class Choice(models.Model):
 
 class Response(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
-    journey = models.ForeignKey(Journey, on_delete=models.CASCADE)    
+    choice_text = models.CharField(max_length=500,default='')
+    journey = models.ForeignKey(Journey, on_delete=models.CASCADE,
+        blank=True,
+        null=True )
+    def __str__(self):
+        return '{} ({})'.format(self.question.question_text, self.choice_text)
 
 class Part(models.Model):
     part_title = models.CharField(max_length=300)

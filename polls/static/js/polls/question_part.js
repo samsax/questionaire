@@ -37,16 +37,32 @@ const app = new Vue({
         jsonObject = {};
     for(var i = 0; i < inputElements.length; i++){
         var inputElement = inputElements[i];
-        jsonObject[inputElement.name] = inputElement.value;
+        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken')
+            jsonObject[inputElement.name] = inputElement.value
 
     }
     inputElements = formElement.getElementsByTagName("select")
     for(var i = 0; i < inputElements.length; i++){
         var inputElement = inputElements[i];
-        jsonObject[inputElement.name] = inputElement.value;
+        if(inputElement.multiple){
+            selectedOptions = []
+            for(var indexOption = 0; indexOption < inputElement.selectedOptions.length; indexOption++)
+                selectedOptions.push(inputElement.selectedOptions[indexOption].value)
+            jsonObject[inputElement.name] = selectedOptions
+        }else{
+            jsonObject[inputElement.name] = inputElement.value;
+        }
+        
 
     }
     return JSON.stringify(jsonObject);
 
     {}
 }
+
+$(document).ready(function()
+{   
+    $('select').each(select =>
+        $(select).select2()
+    )
+})
