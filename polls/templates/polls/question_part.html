@@ -40,12 +40,15 @@
 					<input type="text" name="{{question_part.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				{% else %}
+				
 				<select multiple name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
 						<option>{{ choice.choice_text }}</option>
 					{% endfor %}
 				</select>
 				{% endif %}
+
+				
 			</div>
 		</div>
 	</div>

@@ -16,4 +16,5 @@ urlpatterns = [
     path('<int:part_id>/question_part/', views.question_part, name='question_part'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('save_response', response.save_response, name='save_response'),
+    path('select2', views.select2, name='select2'),
 ] + static( '/static/', document_root=settings.STATIC_ROOT, show_indexes=True )
