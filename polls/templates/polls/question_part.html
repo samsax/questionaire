@@ -8,8 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    
     <title>Bienvenido!</title>
 </head>
 <body>
@@ -30,7 +29,7 @@
 			</div>
 			<div class="card-body">
 				{% if question_part.question.question_type == 2 %}
-				<select name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
+				<select name="{{question_part.id}}"  data-s2="true" class="select2 form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
 						<option value="{{ choice.id }}">{{ choice.choice_text }}</option>
 					{% endfor %}
@@ -40,9 +39,9 @@
 					<input type="text" name="{{question_part.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				{% else %}
-				<select multiple name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
+				<select multiple="multiple" data-s2="true" name="{{question_part.id}}" class="select2 form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
-						<option>{{ choice.choice_text }}</option>
+						<option >{{ choice.choice_text }}</option>
 					{% endfor %}
 				</select>
 				{% endif %}
@@ -58,9 +57,7 @@
     <p>No polls are available.</p>
 {% endif %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="{% static 'js/polls/question_part.js' %}"></script>
 <script>

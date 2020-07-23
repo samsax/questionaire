@@ -1,4 +1,12 @@
-
+$(function () {
+    selects = $('.select2')
+        for(select in selects){
+            $(selects.get(select)).select2()
+        }
+    $('body').on('DOMNodeInserted', 'select', function () {
+        $(this).select2();
+    });
+});
 const app = new Vue({
     el: '#app',
     data: {
@@ -6,6 +14,9 @@ const app = new Vue({
       name: null,
       age: null,
       movie: null
+    },
+    mounted(){
+        
     },
     methods:{ 
         sendResponse: function(){
@@ -59,10 +70,3 @@ const app = new Vue({
 
     {}
 }
-
-$(document).ready(function()
-{   
-    $('select').each(select =>
-        $(select).select2()
-    )
-})
