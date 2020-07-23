@@ -39,12 +39,7 @@
 					<input type="text" name="{{question_part.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				{% else %}
-<<<<<<< HEAD
 				<select multiple="multiple" data-s2="true" name="{{question_part.id}}" class="select2 form-control" id="FormControlSelect{{question_part.id}}">
-=======
-				
-				<select multiple name="{{question_part.id}}" class="form-control" id="FormControlSelect{{question_part.id}}">
->>>>>>> d99b0fc2a7cd3319c6e60197dd586c43256649bc
 					{% for choice in question_part.question.choice_set.all %}
 						<option >{{ choice.choice_text }}</option>
 					{% endfor %}
