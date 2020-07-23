@@ -13,7 +13,10 @@ const app = new Vue({
       errors: [],
       name: null,
       age: null,
-      movie: null
+      movie: null,
+      selected: 2,
+      options: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }]
+    
     },
     mounted(){
         

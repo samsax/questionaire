@@ -40,6 +40,9 @@ def question_part(request, part_id):
             'question_part_list': question_part_list,
         })
 
+def select2(request):
+    return render(request, 'polls/select2.html')
+
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
