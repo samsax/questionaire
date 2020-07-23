@@ -26,7 +26,7 @@
         </div>
         <div class="card-body">
             <h3>{{ questionnaire_part.part.part_description }}</h1>
-            <a class="btn btn-primary" href="{% url 'polls:question_part' questionnaire_part.part.id %}">ir</a>
+            <a class="btn btn-primary" href="{% url 'polls:question_part' questionnaire_id questionnaire_part.part.id %}">ir</a>
         </div>
         {% endif %}
     </div>

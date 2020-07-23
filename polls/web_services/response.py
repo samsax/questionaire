@@ -1,4 +1,5 @@
 import json 
+from json import dumps
 from django.http import HttpResponse
 from polls.models import Choice, Question, Questionnaire, QuestionnairePart, PartQuestion, Response
 def save_response(request):
@@ -24,5 +25,5 @@ def save_response(request):
                         )
                         response.save()
                 
-    resp = {}
+    resp = dumps(dict(success=True,message = 'Guardado'))
     return HttpResponse(resp, content_type='application/json')

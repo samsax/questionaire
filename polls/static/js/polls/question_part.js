@@ -15,7 +15,7 @@ const app = new Vue({
       age: null,
       movie: null,
       selected: 2,
-      options: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }]
+      options: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }],
     
     },
     mounted(){
@@ -31,16 +31,30 @@ const app = new Vue({
                 }
             })
         .then(function(res) {
-        if(res.status==201) {
-            mensaje.innerHTML = 'El nuevo Post ha sido almacenado con id: ' + res.data.id;
-        }
+            if(res.data.success)
+            Swal.fire(
+                res.data.message,
+                'You clicked the button!',
+                'success'
+              ).then( result => {
+                window.location = urlNext
+              }
+              )
+            else
+                Swal.fire(
+                    res.data.message,
+                    'You clicked the button!',
+                    'error'
+                )
         })
         .catch(function(err) {
-            console.log(err);
-        })
-        .then(function() {
-        });
-            }
+            Swal.fire(
+                res.data.message,
+                'You clicked the button!',
+                'error'
+            )
+            })
+        }
         }
     })
 

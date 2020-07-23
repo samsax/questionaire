@@ -64,6 +64,11 @@
 <script src="{% static 'js/polls/question_part.js' %}"></script>
 <script>
 	save_response ="{% url 'polls:save_response' %}"
+	questionnaire_part_next = '{{questionnaire_part_next}}'
+	if('{{questionnaire_part_next}}')
+		urlNext = "{% url 'polls:question_part' questionnaire_id questionnaire_part_next%}"
+
+	
 	
 </script>
 </body>

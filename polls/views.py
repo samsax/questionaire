@@ -28,16 +28,31 @@ def questionnaire_part(request, questionnaire_id):
     template_name = 'polls/questionnaire_part.html'
     context_object_name = 'questionnaire_part_list'
     questionnaire_part_list = QuestionnairePart.objects.filter(
-    	questionnaire = questionnaire_id)
+    	questionnaire = questionnaire_id).order_by('order_questionnaire')
     return render(request, 'polls/questionnaire_part.html', {
             'questionnaire_part_list': questionnaire_part_list,
+            'questionnaire_id' :questionnaire_id
         })
 
-def question_part(request, part_id):
+def question_part(request,questionnaire_id, part_id):
+    if(part_id==0):
+        return HttpResponseRedirect(reverse('polls:index'))
     question_part_list = PartQuestion.objects.filter(
-    	part = part_id)
+    	part = part_id).order_by('order_question')
+    this_part =  QuestionnairePart.objects.filter(
+    	questionnaire = questionnaire_id,part = part_id)
+    actual_index = this_part[0].order_questionnaire
+    questionnaire_part_next = QuestionnairePart.objects.filter(
+    	questionnaire = questionnaire_id,
+        order_questionnaire__gt = actual_index).order_by('order_questionnaire')
+    if(questionnaire_part_next):
+        questionnaire_part_next = questionnaire_part_next[0].part_id
+    else:
+        questionnaire_part_next = 0
     return render(request, 'polls/question_part.html', {
             'question_part_list': question_part_list,
+            'questionnaire_part_next' : questionnaire_part_next,
+            'questionnaire_id' :questionnaire_id
         })
 
 def select2(request):
