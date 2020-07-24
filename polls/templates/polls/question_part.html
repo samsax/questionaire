@@ -9,7 +9,8 @@
 
     <!-- Bootstrap CSS -->
     
-    <title>Bienvenido!</title>
+	<title>Preguntas</title>
+	
 </head>
 <body>
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
@@ -18,7 +19,7 @@
 {% if question_part_list %}
 	
 	
-	<form id="app" method="post">
+	<form id="app" onsubmit="return false" >
 	{% csrf_token %}
 	{% for question_part in question_part_list %}
 	<div id="question_part{{question_part.id}}"class="card">
@@ -26,20 +27,26 @@
 			<div class="card-header">
 				<label for="FormControlSelect{{question_part.id}}">
 					{{ question_part.question.question_text }}</label>
+				<div class="invalid-feedback">
+					You must agree before submitting.
+				</div>
 			</div>
 			<div class="card-body">
 				{% if question_part.question.question_type == 2 %}
-				<select name="{{question_part.id}}"  data-s2="true" class="select2 form-control" id="FormControlSelect{{question_part.id}}">
+				<select  name="{{question_part.id}}"  data-s2="true" 
+				class="select2 form-control" id="FormControlSelect{{question_part.id}}">
 					{% for choice in question_part.question.choice_set.all %}
 						<option value="{{ choice.id }}">{{ choice.choice_text }}</option>
 					{% endfor %}
 				</select>
 				{% elif question_part.question.question_type == 1 %}
 				<div class="input-group input-group-sm mb-3">
-					<input type="text" name="{{question_part.id}}" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+					<input type="text" name="{{question_part.id}}" 
+					class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
 				</div>
 				{% else %}
-				<select multiple="multiple" data-s2="true" name="{{question_part.id}}" class="select2 form-control" id="FormControlSelect{{question_part.id}}">
+				<select multiple="multiple" data-s2="true" name="{{question_part.id}}" 
+				class="select2 form-control" id="FormControlSelect{{question_part.id}}" >
 					{% for choice in question_part.question.choice_set.all %}
 						<option >{{ choice.choice_text }}</option>
 					{% endfor %}
@@ -51,7 +58,12 @@
 		</div>
 	</div>
 	{% endfor %}
-	<input class="btn btn-primary" @click="sendResponse" value="Enviar">
+	<div class="row">
+		<div class="col-lg-12">
+			<button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block" >Enviar</button>
+		</div>
+	</div>
+	
 	</form>
 	</div>
 	</div>
@@ -74,3 +86,7 @@
 </body>
 {% endblock %}
 </html>
+
+<script>
+	
+</script>

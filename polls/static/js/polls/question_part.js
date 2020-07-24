@@ -1,3 +1,4 @@
+
 $(function () {
     selects = $('.select2')
         for(select in selects){
@@ -14,8 +15,8 @@ const app = new Vue({
       name: null,
       age: null,
       movie: null,
-      selected: 2,
-      options: [{ id: 1, text: "Hello" }, { id: 2, text: "World" }],
+      jsonObject:null,
+      valid:false
     
     },
     mounted(){
@@ -23,6 +24,8 @@ const app = new Vue({
     },
     methods:{ 
         sendResponse: function(){
+            formToJson()
+            if(this.valid){
             axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
             axios.defaults.xsrfCookieName = "csrftoken"
             axios.post(save_response, {
@@ -34,7 +37,7 @@ const app = new Vue({
             if(res.data.success)
             Swal.fire(
                 res.data.message,
-                'You clicked the button!',
+                '',
                 'success'
               ).then( result => {
                 window.location = urlNext
@@ -43,20 +46,28 @@ const app = new Vue({
             else
                 Swal.fire(
                     res.data.message,
-                    'You clicked the button!',
+                    '',
                     'error'
                 )
         })
         .catch(function(err) {
             Swal.fire(
                 res.data.message,
-                'You clicked the button!',
+                '',
                 'error'
             )
             })
         }
+        else{
+            Swal.fire(
+                'Todas las respuestas son requeridas',
+                '',
+                'error'
+            )
+            }
         }
-    })
+    }
+})
 
 
   function formToJson(){
@@ -65,8 +76,16 @@ const app = new Vue({
         jsonObject = {};
     for(var i = 0; i < inputElements.length; i++){
         var inputElement = inputElements[i];
-        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken')
-            jsonObject[inputElement.name] = inputElement.value
+        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken'){
+            if(inputElement.value!='')
+                jsonObject[inputElement.name] = inputElement.value
+            else{
+                app.valid = false
+                return
+            }
+                
+        }
+            
 
     }
     inputElements = formElement.getElementsByTagName("select")
@@ -74,16 +93,25 @@ const app = new Vue({
         var inputElement = inputElements[i];
         if(inputElement.multiple){
             selectedOptions = []
-            for(var indexOption = 0; indexOption < inputElement.selectedOptions.length; indexOption++)
+            if(inputElement.selectedOptions.length >0){
+                for(var indexOption = 0; indexOption < inputElement.selectedOptions.length; indexOption++)
                 selectedOptions.push(inputElement.selectedOptions[indexOption].value)
-            jsonObject[inputElement.name] = selectedOptions
+                jsonObject[inputElement.name] = selectedOptions
+            }
+            else{
+                app.valid = false
+                return
+            }
         }else{
-            jsonObject[inputElement.name] = inputElement.value;
+            if(inputElement.value!='')
+                jsonObject[inputElement.name] = inputElement.value
+            else{
+                app.valid = false
+                return
+            }
         }
-        
-
     }
+    app.valid = true
+    app.jsonObject = jsonObject;
     return JSON.stringify(jsonObject);
-
-    {}
 }
