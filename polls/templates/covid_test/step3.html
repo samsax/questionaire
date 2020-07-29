@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 col-sm-12 ">
+            
+
+	
+	
+	<form id="app" onsubmit="return false" >
+	<input type="hidden" name="csrfmiddlewaretoken" value="y81WMGKvkzQdAKjmK0DemjPdrc7X4XvGvydTZumys3lvQC2dqxd8B7CFKI9zmAIB">
+	<div id="question_part3"class="card">
+        <div class="form-group">
+            <div class="card-header">
+                <label for="FormControlSelect3">
+                    ¿En los últimos 7 días has tenido alguno de los siguientes síntomas?
+                </label>
+                <li>Fiebre</li>
+					
+                <li>Tos</li>
+            
+                <li>Dolor de cabeza</li>
+            
+                <li>Diarrea</li>
+            
+                <li>Vómito</li>
+            
+                <li>Calosfrios</li>
+            
+                <li>Dolor abdominal</li>
+            
+                <li>Dolor muscular</li>
+            
+                <li>Dolor en las articulaciones</li>
+            
+                <li>Debilidad y malestar general</li>
+            
+                <li>Secreción nasal</li>
+            
+                <li>Dolor de garganta al tragar alimentos</li>
+            
+                <li>Conjuntivitis</li>
+                <div class="invalid-feedback">
+                    You must agree before submitting.
+                </div>
+            </div>
+            <div class="card-body">
+                
+                <select data-s2="true" name="1" 
+                class="select2 form-control" id="FormControlSelect1" >
+                    
+                        <option >Si</option>
+                    
+                        <option >No</option>
+                    
+                        
+                    
+                </select>
+                
+
+                
+            </div>
+        </div>
+    </div>
+	<div id="question_part4"class="card">
+		<div class="form-group">
+			<div class="card-header">
+				<label for="FormControlSelect3">
+                        ¿Cuáles?</label>
+				<div class="invalid-feedback">
+					You must agree before submitting.
+				</div>
+			</div>
+			<div class="card-body">
+				
+				<select multiple="multiple" data-s2="true" name="3" 
+				class="select2 form-control" id="FormControlSelect3" >
+					
+						<option >Fiebre</option>
+					
+						<option >Tos</option>
+					
+						<option >Dolor de cabeza</option>
+					
+						<option >Diarrea</option>
+					
+						<option >Vómito</option>
+					
+						<option >Calosfrios</option>
+					
+						<option >Dolor abdominal</option>
+					
+						<option >Dolor muscular</option>
+					
+						<option >Dolor en las articulaciones</option>
+					
+						<option >Debilidad y malestar general</option>
+					
+						<option >Secreción nasal</option>
+					
+						<option >Dolor de garganta al tragar alimentos</option>
+					
+						<option >Conjuntivitis</option>
+					
+						<option >Ninguno</option>
+					
+				</select>
+				
+
+				
+			</div>
+		</div>
+	</div>
+		
+	<div class="row">
+		<div class="col-lg-12">
+			<button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block" >Enviar</button>
+		</div>
+	</div>
+	
+	</form>
+	</div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="{% static 'js/polls/question_part.js' %}"></script>
+<script>
+    save_response ="{% url 'polls:save_response' %}"
+    urlNext ="{% url 'polls:step4' %}"
+</script>
+
+</body>
+{% endblock %}

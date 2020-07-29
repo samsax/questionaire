@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="content container">
+        <div class="row">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8 col-sm-12 ">
+	<form id="app" onsubmit="return false" >
+	<input type="hidden" name="csrfmiddlewaretoken" value="y81WMGKvkzQdAKjmK0DemjPdrc7X4XvGvydTZumys3lvQC2dqxd8B7CFKI9zmAIB">
+	<div id="question_part5"class="card">
+		<div class="form-group">
+			<div class="card-header">
+				<label for="FormControlSelect5">
+					¿Tienes alguno de los siguientes síntomas?  
+					<li>Dificultad para respirar</li>
+					<li>Coloración morada de la piel</li>
+					<li>Dolor intenso en el pecho</li>
+					<li>Aumento excesivo en la producción de moco y flema</li>
+					<li>Confusión mental y desmayo</li>
+					<li>Vómito o diarrea persistente</li>
+					<li>Fiebre alta de difícil control</li>
+
+					</label>
+				<div class="invalid-feedback">
+					You must agree before submitting.
+				</div>
+			</div>
+			<div class="card-body">
+				<select data-s2="true" name="5" 
+				class="select2 form-control" id="FormControlSelect5" >
+						<option >SI</option>
+						<option >NO</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div id="question_part6"class="card">
+		<div class="form-group">
+			<div class="card-header">
+				<label for="FormControlSelect3">
+                        ¿Cuáles?</label>
+				<div class="invalid-feedback">
+					You must agree before submitting.
+				</div>
+			</div>
+			<div class="card-body">
+				
+				<select multiple="multiple" data-s2="true" name="3" 
+				class="select2 form-control" id="FormControlSelect3" >
+					
+				<option>Dificultad para respirar</option>
+				<option>Coloración morada de la piel</option>
+				<option>Dolor intenso en el pecho</option>
+				<option>Aumento excesivo en la producción de moco y flema</option>
+				<option>Confusión mental y desmayo</option>
+				<option>Vómito o diarrea persistente</option>
+				<option>Fiebre alta de difícil control</option>
+					
+				</select>
+				
+
+				
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block" >Enviar</button>
+		</div>
+	</div>
+	
+	</form>
+	</div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="{% static 'js/polls/question_part.js' %}"></script>
+<script>
+    save_response ="{% url 'polls:save_response' %}"
+    urlNext ="{% url 'polls:step4' %}"
+</script>
+
+</body>
+{% endblock %}
