@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Choice, Question, Questionnaire, Journey, Response,QuestionnairePart, PartQuestion, Part
+
+from .models import (Choice, InfoPersonal, Journey, Part, PartQuestion,
+                     Question, Questionnaire, QuestionnairePart, Response,
+                     ResponseCovid)
+
 # Register your models here.
 
 admin.site.register(Choice)
@@ -9,6 +13,8 @@ admin.site.register(Response)
 admin.site.register(QuestionnairePart)
 admin.site.register(PartQuestion)
 admin.site.register(Part)
+admin.site.register(ResponseCovid)
+admin.site.register(InfoPersonal)
 class ChoiceInline(admin.TabularInline):
     model = Choice
     extra = 3

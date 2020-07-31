@@ -1,0 +1,154 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<body>
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8 col-sm-12 ">
+            
+
+	
+	
+                <form id="app" onsubmit="return false">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="6MhZXFNYdvUtttUXGiUjWx6kOvJE4so6EPbeNgg8GbriVWQrL6eVODAcYpjrOJc4">
+                    
+                    <div id="question_part1" class="card">
+                        <div class="form-group">
+                            <div class="card-header">
+                                <label for="FormControlSelect1">
+                                    Sucursal dónde labora</label>
+                                
+                            </div>
+                            <div class="card-body">
+                                
+                                <select name="1" data-s2="true" class="select2 form-control" id="FormControlSelect1">
+                                    
+                                        <option>Promotora</option>
+                                    
+                                        <option>Datahome</option>
+                                    
+                                </select>
+                                
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question_part2" class="card">
+                        <div class="form-group">
+                            <div class="card-header">
+                                <label for="FormControlSelect2">
+                                    Nombre completo</label>
+                                
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="text" name="2" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question_part3" class="card">
+                        <div class="form-group">
+                            <div class="card-header">
+                                <label for="FormControlSelect3">
+                                    Correo</label>
+                                
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="text" name="3" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question_part4" class="card">
+                        <div class="form-group">
+                            <div class="card-header">
+                                <label for="FormControlSelect4">
+                                    Puesto</label>
+                                
+                            </div>
+                            <div class="card-body">
+                                
+                                <div class="input-group input-group-sm mb-3">
+                                    <input type="text" name="4" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                </div>
+                                
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="question_part5" class="card">
+                        <div class="form-group">
+                            <div class="card-header">
+                                <label for="FormControlSelect5">
+                                    Riesgos</label>
+                                
+                            </div>
+                            <div class="card-body">
+                                
+                                <select multiple="multiple" data-s2="true" name="5" class="select2 form-control" id="FormControlSelect5">
+                                    
+                                        <option>Problemas del corazón</option>
+                                    
+                                        <option>Obesidad</option>
+                                    
+                                        <option>Hipertensión</option>
+                                    
+                                </select>
+                                
+                
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block">Enviar</button>
+                        </div>
+                    </div>
+                    
+                    </form>
+	</div>
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="{% static 'js/polls/step2.js' %}"></script>
+<script>
+    save_response ="{% url 'polls:save_response_info_personal' %}"
+    urlNext ="{% url 'polls:step4' %}"
+</script>
+
+</body>
+{% endblock %}					
+				</select>
+				
+
+				
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block">Enviar</button>
+		</div>
+	</div>
+	
+	</form>

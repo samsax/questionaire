@@ -1,6 +1,10 @@
 
 from django.shortcuts import get_object_or_404, render, redirect
 
+def step1(request):
+    template_name = 'covid_test/step1.html'
+    return render(request, template_name)
+
 def step2(request):
     template_name = 'covid_test/step2.html'
     return render(request, template_name)

@@ -1,10 +1,7 @@
 from django.db import models
 from django.utils import timezone
 import datetime
-
-# Create your models here.
-
-
+from django.contrib.auth.models import User
 
 class Questionnaire(models.Model):
     questionnaire_title = models.CharField(max_length=300)
@@ -57,6 +54,16 @@ class Response(models.Model):
     def __str__(self):
         return '{} ({})'.format(self.question.question_text, self.choice_text)
 
+class ResponseCovid(models.Model):
+    question = models.IntegerField(default=0)
+    choice_text = models.CharField(max_length=500,default='')
+    choice_value = models.IntegerField(default=0)
+    journey = models.ForeignKey(Journey, on_delete=models.CASCADE,
+        blank=True,
+        null=True)
+    def __str__(self):
+        return '{} ({}) {}'.format(self.question, self.choice_text, self.choice_value)
+
 class Part(models.Model):
     part_title = models.CharField(max_length=300)
     part_description = models.CharField(max_length=500,
@@ -100,6 +107,15 @@ class ResponseQuestion(models.Model):
         null=True )
     def __str__(self):
         return "%s %s" % (self.question.question_text,self.choice.choice_text)
+    
+class InfoPersonal(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    sucursal = models.CharField(default='',max_length=300)
+    nombre = models.CharField(default='',max_length=300)
+    puesto = models.CharField(default='', max_length=300)
+    riesgos = models.CharField(default='',max_length=300 )
+    correo = models.CharField(default='', max_length=300)
+    
 
 
 

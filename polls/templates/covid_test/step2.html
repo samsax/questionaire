@@ -8,6 +8,7 @@
         </div>
         <div class="col-md-8 col-sm-12 ">
             <form id="app" onsubmit="return false" >
+                <div id="questions">
             <input type="hidden" name="csrfmiddlewaretoken" value="xBzS5F1LLHOwbwSIzHszbPaN6nRjEq9eu1LPitDOTbjOroBzfe2tqDXfpTTVW3m9">
             
             <div id="question_part1"class="card">
@@ -15,39 +16,32 @@
                     <div class="card-header">
                         <label for="FormControlSelect1">
                             Ha tenido contacto con una persona que experimentó cualquiera de las siguientes exposiciones durante los 2 días previos o los 14 días siguientes al inicio de los síntomas de un caso probable o confirmado:</label>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
+                        
                     </div>
                     <div class="card-body">
                         
                         <select multiple="multiple" data-s2="true" name="1" 
-                        class="select2 form-control" id="FormControlSelect1" >
+                        class="select2 form-control" id="FormControlSelect1" v-model="first" >
                             
-                                <option >Contacto cara a cara con un caso probable o confirmado dentro de 1 m y por más de 15 min.</option>
+                                <option>Contacto cara a cara con un caso probable o confirmado dentro de 1 m y por más de 15 min.</option>
                             
-                                <option >Contacto físico directo con un caso probable o confirmado.</option>
+                                <option>Contacto físico directo con un caso probable o confirmado.</option>
                             
-                                <option >Atención directa de un paciente con la enfermedad por el COVID-19 probable o confirmada sin utilizar equipo de protección personal adecuado</option>
+                                <option>Atención directa de un paciente con la enfermedad por el COVID-19 probable o confirmada sin utilizar equipo de protección personal adecuado</option>
                             
-                                <option >No he tenido ningun de los anteriores contactos.</option>
+                                <option>No he tenido ningun de los anteriores contactos.</option>
                             
                         </select>
-                        
-
-                        
                     </div>
                 </div>
             </div>
             
-            <div id="question_part2"class="card">
+            <div v-id="first" id="question_part2"class="card">
                 <div class="form-group">
                     <div class="card-header">
                         <label for="FormControlSelect2">
                             ¿Cuenta con diagnóstico confirmado de COVID-19?</label>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
+                        
                     </div>
                     <div class="card-body">
                         
@@ -71,14 +65,14 @@
                     <button href="#" @click="sendResponse" class="btn btn-primary btn-lg  btn-block" >Enviar</button>
                 </div>
             </div>
-            
+        </div>
             </form>
 	</div>
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-<script src="{% static 'js/polls/question_part.js' %}"></script>
+<script src="{% static 'js/polls/step2.js' %}"></script>
 <script>
-    save_response ="{% url 'polls:save_response' %}"
+    save_response ="{% url 'polls:save_response_covid' %}"
     urlNext ="{% url 'polls:step3' %}"
 </script>
 
