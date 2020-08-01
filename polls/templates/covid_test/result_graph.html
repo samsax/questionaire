@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block content %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<link rel="stylesheet" href="{% static 'css/polls/result_graph.css' %}">
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        Chart showing stacked columns for comparing quantities. Stacked charts
+        are often used to visualize data that accumulates to a sum. This chart
+        is showing data labels for each individual section of the stack.
+    </p>
+</figure>
+<script src="{% static 'js/polls/result_graph.js' %}"></script>
+{% endblock %}
