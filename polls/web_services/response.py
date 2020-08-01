@@ -38,12 +38,14 @@ def save_response_covid(request):
             if(isinstance(many_response[question_id], list)):
                 for response_text in  many_response[question_id]:
                     response = ResponseCovid(
+                        user=request.user,
                         question = question_id,
                         choice_text = response_text
                     )
                     response.save()
             else:
                 response = ResponseCovid(
+                    user=request.user,
                     question = question_id,
                     choice_text = many_response[question_id]
                 )

@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 import datetime
 from django.contrib.auth.models import User
+from django import forms
+from django.utils.timezone import now
 
 class Questionnaire(models.Model):
     questionnaire_title = models.CharField(max_length=300)
@@ -55,6 +57,8 @@ class Response(models.Model):
         return '{} ({})'.format(self.question.question_text, self.choice_text)
 
 class ResponseCovid(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING,default=None)
+    date_response = models.DateField(default=now)
     question = models.IntegerField(default=0)
     choice_text = models.CharField(max_length=500,default='')
     choice_value = models.IntegerField(default=0)

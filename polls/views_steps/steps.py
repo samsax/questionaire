@@ -3,11 +3,19 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from polls.models import InfoPersonal
 
 @login_required
 def step1(request):
-    template_name = 'covid_test/step1.html'
-    return render(request, template_name)
+    print(request.user)
+    infoPersonal = InfoPersonal.objects.filter(
+        user = request.user
+    )
+    if(infoPersonal == None):
+        template_name = 'covid_test/step1.html'
+        return render(request, template_name)
+    else:
+        return redirect(reverse('polls:step2'))
 
 @login_required    
 def step2(request):

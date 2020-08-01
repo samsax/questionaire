@@ -116,6 +116,8 @@ def register(request):
 
 def login(request):
     # Creamos el formulario de autenticación vacío
+    print(request.GET)
+    print(request.POST)
     form = AuthenticationForm()
     if request.method == "POST":
         # Añadimos los datos recibidos al formulario
@@ -134,8 +136,7 @@ def login(request):
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos a la portada
-                return redirect('/polls')
-
+                return redirect(request.GET["next"]) if request.GET["next"] else redirect('/polls')
     # Si llegamos al final renderizamos el formulario
     return render(request, "users/login.html", {'form': form})
 
