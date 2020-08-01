@@ -77,6 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'DjangoCovid.wsgi.application'
 
+LOGIN_URL = 'polls:login'
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
