@@ -57,8 +57,8 @@ class Response(models.Model):
         return '{} ({})'.format(self.question.question_text, self.choice_text)
 
 class ResponseCovid(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.DO_NOTHING,default=None)
-    # date_response = models.DateField(default=now)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING,default=None)
+    date_response = models.DateField(default=now)
     question = models.IntegerField(default=0)
     choice_text = models.CharField(max_length=500,default='')
     choice_value = models.IntegerField(default=0)
