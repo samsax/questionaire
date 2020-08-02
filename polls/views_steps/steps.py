@@ -10,7 +10,8 @@ def step1(request):
     infoPersonal = InfoPersonal.objects.filter(
         user = request.user
     )
-    if(infoPersonal == None):
+    print(infoPersonal)
+    if not infoPersonal:
         template_name = 'covid_test/step1.html'
         return render(request, template_name)
     else:
