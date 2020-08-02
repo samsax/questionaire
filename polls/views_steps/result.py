@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def result_graph(request):
+    print('result_graph')
     template_name = 'covid_test/result_graph.html'
     return render(request, template_name)
     

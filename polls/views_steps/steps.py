@@ -7,7 +7,6 @@ from polls.models import InfoPersonal
 
 @login_required
 def step1(request):
-    print(request.user)
     infoPersonal = InfoPersonal.objects.filter(
         user = request.user
     )
