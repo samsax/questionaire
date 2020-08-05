@@ -101,8 +101,8 @@ const app = new Vue({
     }
     inputElements = formElement.getElementsByTagName("select")
     for(var i = 0; i < inputElements.length; i++){
-        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken' & inputElement.style.display != "none" & inputElement.type !='search'){
-            var inputElement = inputElements[i];
+        var inputElement = inputElements[i];
+        if(inputElement.style.display != "none" & inputElement.type != 'search'){
             if(inputElement.multiple){
                 selectedOptions = []
                 if(inputElement.selectedOptions.length >0){
