@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <body>
+	<link rel="stylesheet" href="{% static 'css/steps/steps.css' %}">
     <div class="content container">
         <div class="row">
             <div class="col-md-2">
@@ -16,7 +17,7 @@
 	<div id="question_part3"class="card">
         <div class="form-group">
             <div class="card-header">
-                <label for="FormControlSelect3">
+                <label for="FormControlSelect1">
                     ¿En los últimos 7 días has tenido alguno de los siguientes síntomas?
                 </label>
                 <li>Fiebre</li>
@@ -49,24 +50,16 @@
                 </div>
             </div>
             <div class="card-body">
-                
-                <select data-s2="true" name="1" 
-                class="select2 form-control" id="FormControlSelect1" >
-                    
-                        <option >Si</option>
-                    
-                        <option >No</option>
-                    
-                        
-                    
+                <select id="condicional" data-s2="true" name="1" 
+				class="form-control" id="FormControlSelect1" 
+				v-model="condition">
+                        <option>Sí</option>
+                        <option>No</option>
                 </select>
-                
-
-                
             </div>
         </div>
     </div>
-	<div id="question_part4"class="card">
+	<div v-show="condition=='Sí'" id="question_part4"class="card" >
 		<div class="form-group">
 			<div class="card-header">
 				<label for="FormControlSelect3">
@@ -77,7 +70,7 @@
 			</div>
 			<div class="card-body">
 				
-				<select multiple="multiple" data-s2="true" name="3" 
+				<select v-show="condition=='Sí'" multiple="multiple" data-s2="true" name="3" 
 				class="select2 form-control" id="FormControlSelect3" >
 					
 						<option >Fiebre</option>

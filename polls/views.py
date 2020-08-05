@@ -136,7 +136,7 @@ def login(request):
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos a la portada
-                return redirect(request.GET["next"]) if request.GET["next"] else redirect('/polls')
+                return redirect(request.GET["next"]) if "next" in request.GET else redirect('/polls')
     # Si llegamos al final renderizamos el formulario
     return render(request, "users/login.html", {'form': form})
 

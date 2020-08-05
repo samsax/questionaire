@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <body>
+	<link rel="stylesheet" href="{% static 'css/steps/steps.css' %}">
     <div class="content container">
         <div class="row">
 			<div class="col-md-2">
@@ -23,32 +24,27 @@
 					<li>Fiebre alta de difícil control</li>
 
 					</label>
-				<div class="invalid-feedback">
-					You must agree before submitting.
-				</div>
 			</div>
 			<div class="card-body">
 				<select data-s2="true" name="5" 
-				class="select2 form-control" id="FormControlSelect5" >
-						<option >SI</option>
-						<option >NO</option>
+				class="form-control" id="FormControlSelect5" v-model="condition">
+					<option >No</option>
+					<option >Sí</option>
+						
 				</select>
 			</div>
 		</div>
 	</div>
-	<div id="question_part6"class="card">
+	<div  v-show="condition==='Sí'"  id="question_part6"class="card">
 		<div class="form-group">
 			<div class="card-header">
-				<label for="FormControlSelect3">
+				<label for="FormControlSelect6">
                         ¿Cuáles?</label>
-				<div class="invalid-feedback">
-					You must agree before submitting.
-				</div>
 			</div>
 			<div class="card-body">
 				
-				<select multiple="multiple" data-s2="true" name="3" 
-				class="select2 form-control" id="FormControlSelect3" >
+				<select  v-show="condition==='Sí'"   multiple="multiple" data-s2="true" name="6" 
+				class="select2 form-control" id="FormControlSelect6" >
 					
 				<option>Dificultad para respirar</option>
 				<option>Coloración morada de la piel</option>

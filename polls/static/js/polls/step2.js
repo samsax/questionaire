@@ -5,8 +5,14 @@ $(function () {
             $(selects.get(select)).select2()
         }
     $('body').on('DOMNodeInserted', 'select', function () {
-        $(this).select2();
+        selectDropDown = $(this).select2();
+        selectDropDown.on('select2:select', function (e) {
+            var event = new Event('change');
+            e.target.dispatchEvent(event);
+        });
     });
+
+    
 });
 const app = new Vue({
     el: '#app',
@@ -17,13 +23,17 @@ const app = new Vue({
       movie: null,
       jsonObject:null,
       valid:false,
-      first:[]
+      first:[],
+      condition:''
     
     },
     mounted(){
         
     },
     methods:{ 
+        onChange:function(event){
+            console.log(event.target.value);
+        },
         sendResponse: function(){
             formToJson()
             if(this.valid){
@@ -77,7 +87,7 @@ const app = new Vue({
         jsonObject = {};
     for(var i = 0; i < inputElements.length; i++){
         var inputElement = inputElements[i];
-        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken'){
+        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken' & inputElement.style.display != "none" & inputElement.type !='search'){
             if(inputElement.value!='')
                 jsonObject[inputElement.name] = inputElement.value
             else{
@@ -91,27 +101,31 @@ const app = new Vue({
     }
     inputElements = formElement.getElementsByTagName("select")
     for(var i = 0; i < inputElements.length; i++){
-        var inputElement = inputElements[i];
-        if(inputElement.multiple){
-            selectedOptions = []
-            if(inputElement.selectedOptions.length >0){
-                for(var indexOption = 0; indexOption < inputElement.selectedOptions.length; indexOption++)
-                selectedOptions.push(inputElement.selectedOptions[indexOption].value)
-                jsonObject[inputElement.name] = selectedOptions
+        if(inputElement.name!='' & inputElement.name!='csrfmiddlewaretoken' & inputElement.style.display != "none" & inputElement.type !='search'){
+            var inputElement = inputElements[i];
+            if(inputElement.multiple){
+                selectedOptions = []
+                if(inputElement.selectedOptions.length >0){
+                    for(var indexOption = 0; indexOption < inputElement.selectedOptions.length; indexOption++)
+                    selectedOptions.push(inputElement.selectedOptions[indexOption].value)
+                    jsonObject[inputElement.name] = selectedOptions
+                }
+                else{
+                    app.valid = false
+                    return
+                }
+            }else{
+                if(inputElement.value!='')
+                    jsonObject[inputElement.name] = inputElement.value
+                else{
+                    app.valid = false
+                    return
+                }
             }
-            else{
-                app.valid = false
-                return
             }
-        }else{
-            if(inputElement.value!='')
-                jsonObject[inputElement.name] = inputElement.value
-            else{
-                app.valid = false
-                return
-            }
+            
         }
-    }
+    
     app.valid = true
     app.jsonObject = jsonObject;
     return JSON.stringify(jsonObject);
