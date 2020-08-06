@@ -9,6 +9,15 @@
 
 {% block content %}
 <body>
+    <div class="card">
+        <div class="card-header">
+        	<h2>Seguimiento covid-19</h2>
+        </div>
+        <div class="card-body">
+            <li>Este cuestionario no sustituye a una prueba clínica que identifica casos asintomáticos; es únicamente informativo y no representa un diagnóstico médico. Si presentas deterioro en tu salud, acude inmediatamente a tu Unidad Médica para que te brinden la atención necesaria.</li>
+            <a class="btn btn-primary pull-right" href="{% url 'polls:step1' %}">Ir</a>
+        </div>
+    </div>
 {% if latest_question_list %}
     {% for questionnaire in latest_question_list %}
     <div class="card">
