@@ -57,7 +57,7 @@ def get_results(request):
 def question_to_row(question_id):
     if(question_id == 3):
         return 0
-    elif(question_id == 1):
+    elif(question_id == 5):
         return 2
     elif(question_id == 2):
         return 3
