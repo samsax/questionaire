@@ -45,7 +45,7 @@ def get_results(request):
                 rows = dictfetchall(cursor)
                 if(rows):
                     for row in rows:
-                        series[index]['data'][question_to_row(row['question'])] = row['count']
+                        series[question_to_row(row['question'])]['data'][index] = row['count']
                         index= index+1
             
         resp = dumps(dict(success=True,message = 'Obtenido',categories = categories, series=series))
