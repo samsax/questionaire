@@ -27,4 +27,6 @@ urlpatterns = [
     path('save_response_covid', response.save_response_covid, name='save_response_covid'),
     path('save_response_info_personal', response.save_response_info_personal, name='save_response_info_personal'),
     path('select2', views.select2, name='select2'),
+    path('get/results', result.get_results, name='get_results'),
+    
 ] + static( '/static/', document_root=settings.STATIC_ROOT, show_indexes=True )

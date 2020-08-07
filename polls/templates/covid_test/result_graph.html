@@ -9,10 +9,12 @@
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        Chart showing stacked columns for comparing quantities. Stacked charts
-        are often used to visualize data that accumulates to a sum. This chart
-        is showing data labels for each individual section of the stack.
+        *Esta prueba no reemplaza la prueba clinica para el COVID-19, 
+        es un apoyo para la identificación temprana de casos asintimaticos
     </p>
 </figure>
 <script src="{% static 'js/polls/result_graph.js' %}"></script>
+<script>
+    get_results = "{% url 'polls:get_results' %}"
+</script>
 {% endblock %}

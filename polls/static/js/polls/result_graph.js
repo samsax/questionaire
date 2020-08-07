@@ -1,12 +1,37 @@
-Highcharts.chart('container', {
+
+ $(function () {
+    axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
+    axios.defaults.xsrfCookieName = "csrftoken"
+ axios.post(get_results, {})
+        .then(function(res) {
+            if(res.data.success)
+            createHighChart(res.data.categories, res.data.series)
+            else
+                Swal.fire(
+                    res.data.message,
+                    '',
+                    'error'
+                )
+        })
+        .catch(function(err) {
+            Swal.fire(
+                res.data.message,
+                '',
+                'error'
+            )
+            })
+        
+});
+function createHighChart(categories,series){
+    Highcharts.chart('container', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Stacked column chart'
+        text: 'Resultados test por día'
     },
     xAxis: {
-        categories: [1,2,3,4,5,6,7,8,9,10]
+        categories
     },
     yAxis: {
         min: 0,
@@ -48,18 +73,6 @@ Highcharts.chart('container', {
             }
         }
     },
-    series: [{
-        name: 'Sintomatología leve',
-        data: [1,2,3,4,5,6,7,8,9,10]
-    }, {
-        name: 'Sintomatología grave',
-        data: [0,0,0,4,5,6,7,8,9,10]
-    }, {
-        name: 'Casos de contacto',
-        data: [1,1,1,1,1,1,0,2,0]
-    }, {
-        name: 'Diagnostico confirmado',
-        data: [2,2,2,2,2,2,2,2,2,2]
-    },
-    ]
+    series: series
 });
+}
