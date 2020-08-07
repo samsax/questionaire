@@ -45,9 +45,10 @@ def get_results(request):
                 rows = dictfetchall(cursor)
                 if(rows):
                     for row in rows:
-                        series[question_to_row(row['question'])]['data'][index] = row['count']
-                        index= index+1
-            
+                        if(question_to_row(row['question'])>=0):
+                            series[question_to_row(row['question'])]['data'][index] = row['count']
+                index= index+1
+    
         resp = dumps(dict(success=True,message = 'Obtenido',categories = categories, series=series))
     else:
         resp = dumps(dict(success=False,message = 'Error'))
@@ -55,11 +56,13 @@ def get_results(request):
 
 
 def question_to_row(question_id):
-    if(question_id == 3):
-        return 0
-    elif(question_id == 5):
+    if(question_id == 1):
         return 2
     elif(question_id == 2):
         return 3
-    else:
+    elif(question_id == 3):
+        return 0
+    elif(question_id == 5):
         return 1
+    else:
+        return -1
