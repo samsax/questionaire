@@ -34,12 +34,12 @@ def get_results(request):
         ]
         for row in dates:
             categories.append("{}".format(row['date_response']))
-            index = 0
+            index = 1
             with connection.cursor() as cursor:
                 cursor.execute("""
                 SELECT count(*)as count,question,choice_text
                 FROM polls_responsecovid
-                where date_response = '{}'
+                where date_response = '{}' and choice_value = 1
                 GROUP BY question,choice_text
                 """.format(row['date_response']))
                 rows = dictfetchall(cursor)
@@ -47,7 +47,9 @@ def get_results(request):
                     for row in rows:
                         if(question_to_row(row['question'])>=0):
                             series[question_to_row(row['question'])]['data'][index] = row['count']
-                index= index+1
+                    index= index+1
+                else:
+                    index= index+1
     
         resp = dumps(dict(success=True,message = 'Obtenido',categories = categories, series=series))
     else:

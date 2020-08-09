@@ -63,7 +63,7 @@ const app = new Vue({
         })
         .catch(function(err) {
             Swal.fire(
-                res.data.message,
+                'No fue posible guardar las respuestas',
                 '',
                 'error'
             )
